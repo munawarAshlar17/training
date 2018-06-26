@@ -7,6 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+
+
+    public function shop()
+    {
+        return $this->belongsTo('App\Shop');
+    }
+
     use Notifiable;
 
     /**
