@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products= Product::all();
+        return response()->json($products);
     }
 
     /**
@@ -34,7 +36,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        request()->validate([
+
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'quantity'=>'required'
+        ]);
+
+        $product = new Product;
+
+        $product->name=$request->name;
+        $product->description=$request->description;
+        $product->price=$request->price;
+        $product->shop_id=$request->shop()->id;
+        $product->quantity=$request->quantity;
+
+        $product->save();
+
     }
 
     /**
@@ -45,7 +65,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product=Product::find($id);
+        return response()->json($product);
     }
 
     /**
@@ -56,7 +77,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -68,7 +89,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        request()->validate([
+
+            'name'=>'required',
+            'description'=>'required',
+            'price'=>'required',
+            'quantity'=>'required'
+        ]);
+
+        $product = Product::find($id);
+
+        $product->name=$request->name;
+        $product->description=$request->description;
+        $product->price=$request->price;
+        $product->quantity=$request->quantity;
+
+        $product->save();
     }
 
     /**
@@ -79,6 +116,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product=Product::find($id);
+        $product->delete();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Sale;
+use App\Shop;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -13,7 +15,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        $sales=Sale::all();
+        return response()->json($sales);
     }
 
     /**
@@ -34,7 +37,9 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sale = new Sale;
+        $sale->shop_id=$request->shop()->id;
+
     }
 
     /**
@@ -45,7 +50,8 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        //
+        $sale= Sale::find($id);
+        return response()->json($sale);
     }
 
     /**
@@ -68,7 +74,8 @@ class SaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sale= Sale::find($id);
+        $sale->save();
     }
 
     /**
@@ -79,6 +86,7 @@ class SaleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sale= Sale::find($id);
+        $sale->delete();
     }
 }

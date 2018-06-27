@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -13,7 +14,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers= Customer::all();
+        return response()->json($customers);
+
     }
 
     /**
@@ -34,7 +37,37 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        request()->validate([
+
+            'name'=>'required',
+            'age'=>'required',
+            'sex'=>'required',
+            'email'=>'required | email',
+            'phone_no'=>'required',
+            'address'=>'required',
+
+
+
+        ]);
+
+        $customer = new Customer;
+        $customer->name= $request->name;
+        $customer->age= $request->age;
+        $customer->sex= $request->sex;
+        $customer->email= $request->email;
+        $customer->phone_no= $request->phone_no;
+        $customer->address= $request->address;
+
+        $customer->save();
+
+
+
+
+
+
+
     }
 
     /**
@@ -45,7 +78,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $customer=Customer::find($id);
+        return response()->json($customer);
     }
 
     /**
@@ -57,6 +92,8 @@ class CustomerController extends Controller
     public function edit($id)
     {
         //
+
+
     }
 
     /**
@@ -69,6 +106,31 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+        request()->validate([
+
+            'name'=>'required',
+            'age'=>'required',
+            'sex'=>'required',
+            'email'=>'required | email',
+            'phone_no'=>'required',
+            'address'=>'required',
+
+
+
+        ]);
+
+        $customer =  Customer::find($id);
+        $customer->name= $request->name;
+        $customer->age= $request->age;
+        $customer->sex= $request->sex;
+        $customer->email= $request->email;
+        $customer->phone_no= $request->phone_no;
+        $customer->address= $request->address;
+        $customer->shop_id=$request->shop()->id;
+
+        $customer->save();
+
+
     }
 
     /**
@@ -79,6 +141,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $customer= Customer::find($id);
+        $customer->delete();
     }
 }
