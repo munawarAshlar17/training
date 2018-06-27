@@ -59,6 +59,7 @@ class CustomerController extends Controller
         $customer->email= $request->email;
         $customer->phone_no= $request->phone_no;
         $customer->address= $request->address;
+        $customer->shop_id=$request->shop()->id;
 
         $customer->save();
 
@@ -91,7 +92,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer=Customer::find($id);
+        return response()->json($customer);
 
 
     }

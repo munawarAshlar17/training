@@ -76,7 +76,8 @@ class ShopController extends Controller
      */
     public function edit($id)
     {
-        //
+        $shop =Shop::find($id);
+        return response()->json($shop);
     }
 
     /**
