@@ -38,7 +38,8 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $sale = new Sale;
-        $sale->shop_id=$request->shop()->id;
+        $sale->shop_id=$request->shop_id;
+        $sale->save();
 
     }
 
@@ -77,6 +78,7 @@ class SaleController extends Controller
     public function update(Request $request, $id)
     {
         $sale= Sale::find($id);
+        $sale->shop_id=$request->shop_id;
         $sale->save();
     }
 

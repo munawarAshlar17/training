@@ -50,7 +50,7 @@ class ProductController extends Controller
         $product->name=$request->name;
         $product->description=$request->description;
         $product->price=$request->price;
-        $product->shop_id=$request->shop()->id;
+        $product->shop_id=$request->shop_id;
         $product->quantity=$request->quantity;
 
         $product->save();
@@ -106,6 +106,7 @@ class ProductController extends Controller
         $product->description=$request->description;
         $product->price=$request->price;
         $product->quantity=$request->quantity;
+        $product->shop_id=$request->shop_id;
 
         $product->save();
     }
