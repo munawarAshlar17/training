@@ -27,4 +27,11 @@ class Shop extends Model
         return $this->hasMany('App\User');
     }
 
+    protected $fillable = [
+        'name',
+        'branch_no',
+        'phone_no',
+        'address'
+    ];
+
 }

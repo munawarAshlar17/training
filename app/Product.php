@@ -11,4 +11,13 @@ class Product extends Model
     {
         return $this->belongsTo('App\Shop');
     }
+
+    protected $fillable = [
+        'name',
+        'description',
+        'quantity',
+        'price',
+        'shop_id'
+
+    ];
 }

@@ -11,4 +11,8 @@ class Sale extends Model
     {
         return $this->belongsTo('App\Shop');
     }
+
+    protected $fillable =[
+      'shop_id'
+    ];
 }
