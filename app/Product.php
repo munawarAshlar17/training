@@ -16,8 +16,9 @@ class Product extends Model
         'name',
         'description',
         'quantity',
-        'price',
         'shop_id'
 
     ];
+
+    protected $guarded = ['price'];
 }
